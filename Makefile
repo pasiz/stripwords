@@ -13,6 +13,9 @@ SRC=stripwords.c
 # Object files
 OBJ=$(SRC:.c=.o)
 
+# Installation directory
+INSTALL_DIR=/usr/local/bin
+
 # Default target
 all: $(TARGET)
 
@@ -28,5 +31,13 @@ $(TARGET): $(OBJ)
 clean:
 	$(RM) $(OBJ) $(TARGET)
 
+# Install target
+install: $(TARGET)
+	install -m 0755 $(TARGET) $(INSTALL_DIR)
+
+# Uninstall target
+uninstall:
+	$(RM) $(INSTALL_DIR)/$(TARGET)
+
 # Phony targets (targets not associated with files)
-.PHONY: all clean
+.PHONY: all clean install uninstall
